@@ -53,9 +53,10 @@ File => Save World As => βαζω το οναμα(name.world) και την τοποθεσια  και => Sav
 
 Στο τερματικο κανω
 
-φταχνω εναν φακελο learn_ros2_ws και src 
+```shell
+ ros2 launch urdf_tutorial display.launch.py model:=/home/hercules/my_robot/my_robot.urdf 
+```
 
-μετα μπαινω στο src και γραφω
 
 ******Παρατηρησεις 
 
