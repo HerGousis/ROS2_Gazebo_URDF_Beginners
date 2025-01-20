@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<robot name="braxionas" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+   <material name="green">
+       <color  rgba="0 0.6 0 1" />
+   </material>
+   
+    <material name="grey">
+       <color rgba="0.7 0.7 0.7 1" />
+    </material>
+
+    <material name="grey1">
+       <color rgba="0.7 0.7 0 1" />
+    </material>
+
+    <material name="grey2">
+       <color rgba="0.7 0 0.7 1" />
+    </material>
+
+
+    <material name="grey3">
+       <color rgba="0.7 0 0 1" />
+    </material>
+
+
+    <link name="base_footprint"/>
+
+    <xacro:macro name="kommatia" params="fakelos onoma x y z xrvma rpyx  rpyy">
+       <link name ="${onoma}">
+        <visual>
+            <geometry>
+               <mesh filename ="package://braxionas/meshes/${fakelos}/${onoma}" scale="0.001 0.001 0.001" />
+            </geometry>
+            <origin xyz="${x} ${y} ${z}" rpy="${rpyx} ${rpyy} 0"/>
+            <material name="${xrvma}" />
+        </visual>
+
+
+       </link>
+    </xacro:macro>
+    
+    <xacro:kommatia fakelos="bases" onoma="base.stl" x="0"  y="-0.3" z="-0.1" xrvma="green" rpyx="${pi/2}" rpyy="0"/> 
+
+    <xacro:kommatia fakelos="joints" onoma="jaw1.stl" x="0" y="0.26" z="-0.1" xrvma="grey"  rpyx="${pi/2}" rpyy="0"/>
+    <xacro:kommatia fakelos="joints" onoma="jaw2.stl" x="0" y="0" z="0" xrvma="grey1" rpyx="0" rpyy="0"/>
+    <xacro:kommatia fakelos="joints" onoma="jaw3.stl" x="-0.4" y="0" z="0.05" xrvma="grey2"  rpyx="${pi/2}"  rpyy="0"/>
+    <xacro:kommatia fakelos="joints" onoma="jaw4.stl" x="0.3" y="-0.23" z="0" xrvma="grey3"  rpyx="${pi/2}"  rpyy="0"/>
+   
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint" />
+        <child link ="base.stl" />
+        
+        <origin xyz ="0 0 0.1" rpy="0 0 0" />
+    </joint> 
+
+    <joint name="base_jaw1" type="continuous">
+      <parent link="base.stl" />
+      <child link="jaw1.stl" />
+      <origin xyz="0 0 0.09" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <joint name="jaw1_jaw2" type="continuous">
+      <parent link="jaw1.stl" />
+      <child link="jaw2.stl" />
+      <origin xyz="-0.15 0 0.05" rpy="0 0 0" />
+      <axis xyz="0 1 0" />
+    </joint>
+
+    <joint name="jaw2_jaw3" type="continuous">
+      <parent link="jaw2.stl" />
+      <child link="jaw3.stl" />
+      <origin xyz="-0.35 -0.1 -0.002" rpy="0 0 0" />
+      <axis xyz="0 1 0" />
+    </joint>
+
+        <joint name="jaw3_jaw4" type="continuous">
+      <parent link="jaw3.stl" />
+      <child link="jaw4.stl" />
+      <origin xyz="-0.265 0.08 0.05" rpy="0 0 0" />
+      <axis xyz="1 0 0" />
+    </joint>
+
+
+</robot>

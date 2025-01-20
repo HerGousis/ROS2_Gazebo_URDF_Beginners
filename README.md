@@ -250,3 +250,51 @@ http://wiki.ros.org/urdf/XML/link
 ### Για ενωση κομματιων του robot 
 http://wiki.ros.org/urdf/XML/joint
 
+## Create Robot Arm in RVIZ (file .Xacro)
+
+ <div style="text-align:center;">
+    <img src="/5.png" alt="5" width="800">
+</div>
+
+1. Δημιουργω εναν φακελο braxionas και μεσα σε αυτον εναν φακελο src
+```shell
+colcon build
+```
+1.  μεσα στο src εκτελω την εντολη
+ ```shell
+ros2 pkg create braxionas
+```
+Διαγραφω τους φακελους include , src και φτιαχνω launch , urdf ,meshes , rviz  
+Διαμορφωνω το αρχειο ```CMakeLists.txt``` καταλληλα και μετα 
+
+1. Ανοιγω το αρχειο bashrc
+```shell
+gedit ~/.bashrc
+```
+```shell
+source ~/braxionas/install/setup.bash
+```
+και μετα στον φακελο braxionas (log install src build)
+
+```shell
+colcon build
+colcon build --symlink-install
+```
+
+μετα   ```source install/setup.bash```
+
+```shell
+ros2 launch braxionas display.launch.xml
+```
+ή
+```shell
+ros2 launch braxionas display.launch.py
+```
+
+και το αποτελεσμα ειναι :
+ <div style="text-align:center;">
+    <img src="/6.png" alt="6" width="800">
+</div>
+
+### NOTES
+Τα αχρεια .stl υπαρχουν και στα [Repositories](https://github.com/HerGousis/Robotic_ARM)
