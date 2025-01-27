@@ -298,3 +298,42 @@ ros2 launch braxionas display.launch.py
 
 ### NOTES
 Τα αχρεια .stl υπαρχουν και στα [Repositories](https://github.com/HerGousis/Robotic_ARM)
+
+## Robot in the  my world (Gazebo) 
+
+1. Δημιουργω εναν φακελο my_robot_description  και μεσα σε αυτον εναν φακελο src
+```shell
+colcon build
+```
+  Μετα προσθετουμετουμε τα αρχεια που ειναι ανεβασμενα στο φακελο ```my_robot_description/src ```
+Επειτα γραφω στον φακελο  my_robot_description (log install src build)
+
+```shell
+colcon build
+colcon build --symlink-install
+```
+
+μετα   
+```shell 
+source install/setup.bash
+```
+και τελος 
+```shell
+ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
+```
+
+και σε αλλο τερματικο  
+```shell
+ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5},angular:{z: 0}}" 
+```
+και θα δουμε να κινειται κατα τον αξονα Χ μεσα στο κοσμο που εχουμε δημιουργησει
+
+ή 
+```shell
+ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5},angular:{z: 0,5}}" 
+```
+θα δουμε οτι κινειται κυκλικα 
+
+ <div style="text-align:center;">
+    <img src="/7.png" alt="7" width="800">
+</div>
