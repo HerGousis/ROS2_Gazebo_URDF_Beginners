@@ -337,3 +337,29 @@ ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5},angular:{z: 0
  <div style="text-align:center;">
     <img src="/7.png" alt="7" width="800">
 </div>
+
+## Add Camera in Gazebo 
+
+1. Μεσα στο φακελο urdf ```my_robot_description/src/my_robot_description/urdf```
+ Προσθετουμε ενα ακομα αρχειο ``` camera.xacro ``` και το συμπληρωνουμε στο αχρειο ``` my_robot.urdf.xacro```
+Επειτα γραφω στον φακελο  my_robot_description (log install src build)
+
+```shell
+colcon build
+colcon build --symlink-install
+```
+
+μετα   
+```shell 
+source install/setup.bash
+```
+και τελος 
+```shell
+ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
+```
+
+ <div style="text-align:center;">
+    <img src="/8.png" alt="8" width="800">
+</div>
+
+* Στο rviz για να προσθεσουμε την καμερα πηγενουμε ```Add``` και επιλεγω το ```Image``` και στην συνεχεια στο ```Topic``` επιλεγω την καμερα μου .
