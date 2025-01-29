@@ -34,8 +34,12 @@
             <origin xyz="${x} ${y} ${z}" rpy="${rpyx} ${rpyy} 0"/>
             <material name="${xrvma}" />
         </visual>
-
-
+        <collision>
+            <geometry>
+               <mesh filename ="package://braxionas/meshes/${fakelos}/${onoma}" scale="0.001 0.001 0.001" />
+            </geometry>
+            <origin xyz="${x} ${y} ${z}" rpy="${rpyx} ${rpyy} 0"/>
+        </collision>
        </link>
     </xacro:macro>
     
