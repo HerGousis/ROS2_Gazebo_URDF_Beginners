@@ -35,7 +35,7 @@ File => Save World As => βαζω το οναμα(name.world) και την τοποθεσια  και => Sav
    gazebo (name.world)
 ```
  <div style="text-align:center;">
-    <img src="/4.png" alt="4" width="800">
+    <img src="image/4.png" alt="4" width="800">
 </div>
 
 ## Create My Robot URDF
@@ -65,7 +65,7 @@ File => Save World As => βαζω το οναμα(name.world) και την τοποθεσια  και => Sav
 Ενω για μελη που δεν θελουμε να εχουν ευκινισια και απλως να ομαδοποιηθουν βαζουμε τον τυπο type="fixed"
 
  <div style="text-align:center;">
-    <img src="/3.png" alt="3" width="800">
+    <img src="image/3.png" alt="3" width="800">
 </div>
 
 ##  URDF+Xacro creation ,Visualize in RVIZ2 and Gazebo +Teleoperation
@@ -160,7 +160,7 @@ hercules@hercules:~$
 ros2 launch my_first_pkg display.launch.py
 ```
  <div style="text-align:center;">
-    <img src="/2.png" alt="2" width="800">
+    <img src="image/2.png" alt="2" width="800">
 </div>
 
 ή  για να τρεξω στο gazebo γραφω :
@@ -169,7 +169,7 @@ ros2 launch my_first_pkg display.launch.py
 ros2 launch my_first_pkg gazebo.launch.py
 ```
  <div style="text-align:center;">
-    <img src="/1.png" alt="1" width="800">
+    <img src="image/1.png" alt="1" width="800">
 </div>
 
 
@@ -253,7 +253,7 @@ http://wiki.ros.org/urdf/XML/joint
 ## Create Robot Arm in RVIZ (file .Xacro)
 
  <div style="text-align:center;">
-    <img src="/5.png" alt="5" width="800">
+    <img src="image/5.png" alt="5" width="800">
 </div>
 
 1. Δημιουργω εναν φακελο braxionas και μεσα σε αυτον εναν φακελο src
@@ -293,7 +293,7 @@ ros2 launch braxionas display.launch.py
 
 και το αποτελεσμα ειναι :
  <div style="text-align:center;">
-    <img src="/6.png" alt="6" width="800">
+    <img src="image/6.png" alt="6" width="800">
 </div>
 
 ### NOTES
@@ -335,7 +335,7 @@ ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5},angular:{z: 0
 θα δουμε οτι κινειται κυκλικα 
 
  <div style="text-align:center;">
-    <img src="/7.png" alt="7" width="800">
+    <img src="image/7.png" alt="7" width="800">
 </div>
 
 ## Add Camera in Gazebo 
@@ -359,7 +359,29 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
 ```
 
  <div style="text-align:center;">
-    <img src="/8.png" alt="8" width="800">
+    <img src="image/8.png" alt="8" width="800">
 </div>
 
 * Στο rviz για να προσθεσουμε την καμερα πηγενουμε ```Add``` και επιλεγω το ```Image``` και στην συνεχεια στο ```Topic``` επιλεγω την καμερα μου .
+
+## Add lidar
+
+Δημιουγρουμε ενα καινουριγιο αρχειο liadr.xacro και το προσθετουμε στο ```my_robot.urdf.xacro```
+
+```shell
+colcon build
+colcon build --symlink-install
+```
+
+μετα   
+```shell 
+source install/setup.bash
+```
+και τελος 
+```shell
+ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
+```
+
+ <div style="text-align:center;">
+    <img src="image/9.png" alt="9" width="800">
+</div>
