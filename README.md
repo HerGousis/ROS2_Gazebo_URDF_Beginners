@@ -385,3 +385,22 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
  <div style="text-align:center;">
     <img src="image/9.png" alt="9" width="800">
 </div>
+
+* για το ROS2 στο lidar.xacro             
+ ```shell
+ <plugin name="gazebo_ros_ray_sensor" filename="libgazebo_ros_ray_sensor.so">
+     <topic_name>/scan</topic_name>
+     <frame_name>lidar_link</frame_name>
+     <output_type>sensor_msgs/LaserScan</output_type>
+ </plugin> 
+```
+
+ <div style="text-align:center;">
+    <img src="image/10.png" alt="10" width="800">
+</div>
+
+ <div style="text-align:center;">
+    <img src="image/11.png" alt="11" width="800">
+</div>
+
+* Στο rviz για να προσθεσουμε την καμερα πηγενουμε ```Add``` και επιλεγω το ```By topic``` και στην συνεχεια στο ```LaserScan``` επιλεγω την καμερα μου .
