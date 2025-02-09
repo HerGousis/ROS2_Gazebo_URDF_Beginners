@@ -481,7 +481,6 @@ ros2 run robot_controller go
  <div style="text-align:center;">
     <video width="800" controls>
         <source src="image/12.webm" type="video/webm">
-        Your browser does not support the video tag.
     </video>
 </div>
 
