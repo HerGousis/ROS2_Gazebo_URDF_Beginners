@@ -478,9 +478,5 @@ ros2 run robot_controller go
 Τελος μεσω της ```OpenCv``` αποθηκευει καθε 10 δευτερολεπτα μια φωτογραφια μεσα στο φακελο ```image_data``` 
 Και οταν ξανα καλεσω το ```go_with_laser.py``` σβηνει τις παλιες φωτογραφιες και προσθετει καινουργιες και το αρχειο ```laser_data.txt``` αναναιωνεται
 
- <div style="text-align:center;">
-    <video width="800" controls>
-        <source src="image/12.webm" type="video/webm">
-    </video>
-</div>
+https://github.com/user-attachments/assets/7c2a3cc9-6bfc-4115-971e-3b9456bf6529
 
