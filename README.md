@@ -404,3 +404,84 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
 </div>
 
 * Στο rviz για να προσθεσουμε την καμερα πηγενουμε ```Add``` και επιλεγω το ```By topic``` και στην συνεχεια στο ```LaserScan``` επιλεγω την καμερα μου .
+
+## Create Python Script 
+
+ Γραφω στον φακελο ``` my_robot_description/src ```
+
+ ```shell
+ ros2 pkg create robot_controller --build-type ament_python --dependencies rclpy
+```
+
+και δημιουργειτε ο φακελος ```robot_controller``` 
+
+* στο αρχειο ```package.xml```
+
+συμπληρωνω :
+
+```shell
+  <depend>rclpy</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>my_robot_description</depend>
+```
+
+* στο αρχειο ```setup.py```
+συμπληρωνω :
+
+```shell
+     entry_points={
+        'console_scripts': [
+            "go=robot_controller.go:main",
+            "go_with_laser=robot_controller.go_with_laser:main"
+        ],
+    },
+```
+* και γραφω τον κωδικα σε αρχειο .py εκει που ειναι το ```__init__.py``` 
+
+
+τελος εκτελω στον φακελο ``` my_robot_description/```
+```shell
+colcon build
+colcon build --symlink-install
+```
+και ανοιγω δυο τερματικα μεσα στο φακελο ```my_robot_description``` 
+
+* στο ενα γραφω 
+```shell 
+source install/setup.bash
+```
+και μετα  
+```shell
+ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
+```
+
+* στο αλλο 
+
+```shell 
+source install/setup.bash
+```
+και μετα  
+```shell
+ros2 run robot_controller go_with_laser 
+```
+ή 
+
+```shell
+ros2 run robot_controller go
+```
+
+### NOTES
+Το αρχειο ```go_with_laser.py``` κανει το ρομποτ να κινειτε γυρω απο ενα αντικειμενο κρατοντας σταθερη αποσταση 1.0 
+Επισης αποθηκευει στο φακελο ```laser_data``` τις τιμες που καταγραφει ο lidar κατα την προσομοιωση 
+Τελος μεσω της ```OpenCv``` αποθηκευει καθε 10 δευτερολεπτα μια φωτογραφια μεσα στο φακελο ```image_data``` 
+Και οταν ξανα καλεσω το ```go_with_laser.py``` σβηνει τις παλιες φωτογραφιες και προσθετει καινουργιες και το αρχειο ```laser_data.txt``` αναναιωνεται
+
+ <div style="text-align:center;">
+    <video width="800" controls>
+        <source src="image/12.webm" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
