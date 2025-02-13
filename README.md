@@ -480,3 +480,15 @@ ros2 run robot_controller go
 
 https://github.com/user-attachments/assets/7c2a3cc9-6bfc-4115-971e-3b9456bf6529
 
+## Install OpenCV
+
+στο Τερματικο γραφω :
+```shell
+pip install opencv-python
+```
+και μετα 
+```shell
+sudo apt install ros-humble-cv-bridge
+```
+
+
