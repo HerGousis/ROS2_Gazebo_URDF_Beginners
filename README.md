@@ -407,6 +407,17 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
 
 ## Create Python Script 
 
+## Install OpenCV
+
+στο Τερματικο γραφω :
+```shell
+pip install opencv-python
+```
+και μετα 
+```shell
+sudo apt install ros-humble-cv-bridge
+```
+
  Γραφω στον φακελο ``` my_robot_description/src ```
 
  ```shell
@@ -471,24 +482,22 @@ ros2 run robot_controller go_with_laser
 ```shell
 ros2 run robot_controller go
 ```
+ή 
+
+```shell
+ros2 run robot_controller go_with_lidar 
+```
+
+Το αρχειο `go_with_lidar.py` καλλει αλλα αρχεια `.py` απο τον φακελο `utils` και ουσιαστικα ειναι το ιδιο Python Script του ` go_with_laser`     
 
 ### NOTES
-Το αρχειο ```go_with_laser.py``` κανει το ρομποτ να κινειτε γυρω απο ενα αντικειμενο κρατοντας σταθερη αποσταση 1.0 
+Το αρχειο ```go_with_laser.py``` ή ```go_with_lidar.py```κανει το ρομποτ να κινειτε γυρω απο ενα αντικειμενο κρατοντας σταθερη αποσταση 1.0 
 Επισης αποθηκευει στο φακελο ```laser_data``` τις τιμες που καταγραφει ο lidar κατα την προσομοιωση 
 Τελος μεσω της ```OpenCv``` αποθηκευει καθε 10 δευτερολεπτα μια φωτογραφια μεσα στο φακελο ```image_data``` 
-Και οταν ξανα καλεσω το ```go_with_laser.py``` σβηνει τις παλιες φωτογραφιες και προσθετει καινουργιες και το αρχειο ```laser_data.txt``` αναναιωνεται
+Και οταν ξανα καλεσω το ```go_with_laser.py``` ή ```go_with_lidar.py``` σβηνει τις παλιες φωτογραφιες και προσθετει καινουργιες και το αρχειο ```laser_data.txt``` αναναιωνεται
 
 https://github.com/user-attachments/assets/7c2a3cc9-6bfc-4115-971e-3b9456bf6529
 
-## Install OpenCV
 
-στο Τερματικο γραφω :
-```shell
-pip install opencv-python
-```
-και μετα 
-```shell
-sudo apt install ros-humble-cv-bridge
-```
 
 

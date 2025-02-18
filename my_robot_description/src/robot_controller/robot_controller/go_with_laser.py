@@ -40,7 +40,7 @@ class ObstacleAvoidance(Node):
         self.safe_distance = 1.0  # Στόχος απόστασης (μέτρα)
 
         # Χρησιμοποιούμε Timer για καταγραφή κάθε 10 δευτερόλεπτα
-        self.timer = self.create_timer(10.0, self.record_laser_data)
+        self.timer = self.create_timer(100.0, self.record_laser_data)
         
         # Δημιουργία του αντικειμένου CvBridge για την μετατροπή εικόνας
         self.bridge = CvBridge()
@@ -50,7 +50,7 @@ class ObstacleAvoidance(Node):
         self.delete_old_images()
 
         # Χρονόμετρο για την καταγραφή εικόνας κάθε 10 δευτερόλεπτα
-        self.camera_timer = self.create_timer(10.0, self.capture_image)
+        self.camera_timer = self.create_timer(100.0, self.capture_image)
 
 
     def delete_old_images(self):
@@ -74,13 +74,13 @@ class ObstacleAvoidance(Node):
             laser_data = f"Ranges: {valid_ranges}\n"
             self.laser_file.write(laser_data)
 
-            # Αν ο ρομπότ είναι πολύ κοντά σε εμπόδια
+            
             if average_distance < self.safe_distance:
                 self.get_logger().info(f"Too close! Distance: {average_distance:.2f}. Turning right...")
                 twist.linear.x = 0.2
                 twist.angular.z = -0.5  # Στροφή δεξιά
 
-            # Αν ο ρομπότ είναι πολύ μακριά από εμπόδια
+            
             elif average_distance > self.safe_distance:
                 self.get_logger().info(f"Too far! Distance: {average_distance:.2f}. Turning left...")
                 twist.linear.x = 0.2
