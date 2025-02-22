@@ -7,6 +7,29 @@ import cv2
 from cv_bridge import CvBridge
 import time
 
+
+
+from nav_msgs.msg import OccupancyGrid
+from sensor_msgs.msg import LaserScan
+
+class SLAMIntegration(Node):
+    def __init__(self):
+        super().__init__('slam_integration')
+
+        # Συνδρομή στα δεδομένα του LIDAR
+        self.lidar_subscriber = self.create_subscription(
+            LaserScan,
+            '/gazebo_ros_ray_sensor/out',  
+            self.lidar_callback,
+            10)
+        
+        # Δημοσίευση των δεδομένων στο /scan
+        self.scan_publisher = self.create_publisher(LaserScan, '/scan', 10)
+
+    def lidar_callback(self, msg):
+        self.scan_publisher.publish(msg) 
+
+
 class ObstacleAvoidance(Node):
     def __init__(self):
         super().__init__('robot_controller')
@@ -133,11 +156,26 @@ class ObstacleAvoidance(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = ObstacleAvoidance()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
+
+    # Δημιουργία των δύο nodes
+    slam_node = SLAMIntegration()
+    obstacle_node = ObstacleAvoidance()
+
+    # Χρήση MultiThreadedExecutor για παράλληλη εκτέλεση
+    executor = rclpy.executors.MultiThreadedExecutor()
+    executor.add_node(slam_node)
+    executor.add_node(obstacle_node)
+
+    try:
+        executor.spin()  # Τρέχει και τα δύο nodes ταυτόχρονα
+    except KeyboardInterrupt:
+        pass
+    finally:
+        slam_node.destroy_node()
+        obstacle_node.destroy_node()
+        rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
+
 

@@ -7,15 +7,41 @@ import cv2
 from cv_bridge import CvBridge
 import time
 
-from .utils import movement 
+from .utils import movement , slam
+
 
 
 def main(args=None):
     rclpy.init(args=args)
-    node = movement.ObstacleAvoidance()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
+
+    # Δημιουργία των δύο nodes
+    slam_node = slam.SLAMIntegration()
+    obstacle_node = movement.ObstacleAvoidance()
+
+    # Χρήση MultiThreadedExecutor για παράλληλη εκτέλεση
+    executor = rclpy.executors.MultiThreadedExecutor()
+    executor.add_node(slam_node)
+    executor.add_node(obstacle_node)
+
+    try:
+        executor.spin()  # Τρέχει και τα δύο nodes ταυτόχρονα
+    except KeyboardInterrupt:
+        pass
+    finally:
+        slam_node.destroy_node()
+        obstacle_node.destroy_node()
+        rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
+
+
+# def main(args=None):
+#     rclpy.init(args=args)
+#     node = movement.ObstacleAvoidance()
+#     rclpy.spin(node)
+#     node.destroy_node()
+#     rclpy.shutdown()
+
+# if __name__ == '__main__':
+#     main()

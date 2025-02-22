@@ -405,7 +405,7 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
 
 * Στο rviz για να προσθεσουμε την καμερα πηγενουμε ```Add``` και επιλεγω το ```By topic``` και στην συνεχεια στο ```LaserScan``` επιλεγω την καμερα μου .
 
-## Create Python Script 
+
 
 ## Install OpenCV
 
@@ -417,6 +417,7 @@ pip install opencv-python
 ```shell
 sudo apt install ros-humble-cv-bridge
 ```
+## Create Python Script 
 
  Γραφω στον φακελο ``` my_robot_description/src ```
 
@@ -498,6 +499,21 @@ ros2 run robot_controller go_with_lidar
 
 https://github.com/user-attachments/assets/7c2a3cc9-6bfc-4115-971e-3b9456bf6529
 
+## SLAM spatial mapping
 
+ανοιγουμε τρια τερματικα
+στο πρωτο ```hercules@hercules:~/my_robot_description$```
+  ```shell
+ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
+```
 
+στο δευτερο ```hercules@hercules:~/my_robot_description$```
+  ```shell
+ros2 launch slam_toolbox online_async_launch.py
+```
+στο τριτο ```hercules@hercules:~/my_robot_description$```
+  ```shell
+ros2 run robot_controller go_with_lidar 
+```
 
+![Image](https://github.com/user-attachments/assets/e8c8144e-08a0-4d4b-b57c-d2e08d5c6eba)
