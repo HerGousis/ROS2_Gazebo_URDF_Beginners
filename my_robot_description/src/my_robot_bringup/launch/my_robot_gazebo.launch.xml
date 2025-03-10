@@ -10,7 +10,7 @@
     </node>
 
     <include file="$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py" >
-      <arg name="world" value="$(find-pkg-share my_robot_bringup)/worlds/world_ATHENA.world" />
+      <arg name="world" value="$(find-pkg-share my_robot_bringup)/worlds/world_ATHENA_qr_bazo.world" />
     </include>
 
     <node pkg="gazebo_ros" exec="spawn_entity.py"

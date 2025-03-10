@@ -517,3 +517,28 @@ ros2 run robot_controller go_with_lidar
 ```
 
 ![Image](https://github.com/user-attachments/assets/e8c8144e-08a0-4d4b-b57c-d2e08d5c6eba)
+
+## Add Qr and Object στο Gazebo
+### Qr
+απο το Github `` https://github.com/mikaelarguedas/gazebo_models``
+
+στο τερματικο κανω
+ ```shell
+git clone https://github.com/mikaelarguedas/gazebo_models.git
+cd gazebo_models/ar_tags/scripts/
+python3 generate_markers_model.py -i /home/hercules/gazebo_models/ar_tags -s 1000 -w 500 -v
+```
+
+και ανοιγω το Gazebo και αναζητω το αντικειμενο 
+
+### Object 
+
+Προσθετω το αντικειμενο στο Gazebo 
+Πρεπει να εχουμε αρχεια ``.obj`` ``.jpg`` ``.mtl``
+
+κανω αποθηκευση το κοσμο και αλλαζω οπου χρειαστει στον κωδικα 
+
+ <div style="text-align:center;">
+    <img src="image/13.png" alt="13" width="800">
+</div>
+
