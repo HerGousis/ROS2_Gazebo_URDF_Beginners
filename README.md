@@ -539,6 +539,6 @@ python3 generate_markers_model.py -i /home/hercules/gazebo_models/ar_tags -s 100
 κανω αποθηκευση το κοσμο και αλλαζω οπου χρειαστει στον κωδικα 
 
  <div style="text-align:center;">
-    <img src="image/13.png" alt="13" width="800">
+    <img src="image/14.png" alt="14" width="800">
 </div>
 
