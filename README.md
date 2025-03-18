@@ -542,3 +542,40 @@ python3 generate_markers_model.py -i /home/hercules/gazebo_models/ar_tags -s 100
     <img src="image/14.png" alt="14" width="800">
 </div>
 
+## Add UR5 and robot in RVIZ (file .Xacro)
+
+Δημιουργια ενος καινουργιου αρχειου ``ur5.xacro ``
+και προσθηκη στο αρχειο `` my_robot.urdf.xacro``
+γραφοντας 
+ ```shell
+ <xacro:include filename="ur5.xacro" />
+```
+κανω 
+```shell
+colcon build
+colcon build --symlink-install
+```
+
+μετα   
+```shell 
+source install/setup.bash
+```
+και τελος 
+```shell
+ros2 launch my_robot_description display.launch.xml 
+```
+
+ <div style="text-align:center;">
+    <img src="image/15.png" alt="15" width="800">
+</div>
+
+## COLMAP
+
+Απο τις εικονες που αποθηκευτηκαν στο φακελο ``image_data``
+και με χρηση του COLMAP
+ <div style="text-align:center;">
+    <img src="image/16.png" alt="16" width="800">
+</div>
+ <div style="text-align:center;">
+    <img src="image/17.png" alt="17" width="800">
+</div>
