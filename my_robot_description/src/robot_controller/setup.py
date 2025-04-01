@@ -22,7 +22,8 @@ setup(
         'console_scripts': [
             "go=robot_controller.go:main",
             "go_with_laser=robot_controller.go_with_laser:main",
-            "go_with_lidar=robot_controller.go_with_lidar:main"
+            "go_with_lidar=robot_controller.go_with_lidar:main",
+            "qr=robot_controller.qr:main"
         ],
     },
 )

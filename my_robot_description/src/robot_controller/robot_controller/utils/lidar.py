@@ -7,12 +7,12 @@ import os
 class Lidar:
     def __init__(self, node):
         self.node = node  # Παίρνει το Node από έξω
-        self.safe_distance = 1.0  # Απόσταση ασφαλείας
+        self.safe_distance = 2.0  # Απόσταση ασφαλείας
 
         # Δημιουργία publisher για εντολές κίνησης
         self.cmd_publisher = self.node.create_publisher(Twist, '/cmd_vel', 10)
 
-        self.laser_file_path = '/home/hercules/my_robot_description/laser_data/laser_data.txt'
+        self.laser_file_path = '/home/hercules/data/laser_data/laser_data1.txt'
         if os.path.exists(self.laser_file_path):
             os.remove(self.laser_file_path)
             self.node.get_logger().info(f"Deleted old file: {self.laser_file_path}")

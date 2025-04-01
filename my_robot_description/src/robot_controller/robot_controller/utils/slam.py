@@ -13,7 +13,7 @@ class SLAMIntegration(Node):
         super().__init__('slam_integration')
 
         # Ορισμός φακέλου αποθήκευσης
-        self.save_path = '/home/hercules/my_robot_description/laser_data/'
+        self.save_path = '/home/hercules/data/laser_data/slam'
         os.makedirs(self.save_path, exist_ok=True)
 
         # Διαγραφή παλιών χαρτών

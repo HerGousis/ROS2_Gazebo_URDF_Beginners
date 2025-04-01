@@ -30,6 +30,14 @@
      
      </joint>
      
+     <!--<joint name="base_camera_joint" type="fixed">
+     
+         <parent link="hand_link"/>
+         <child link="camera_link" />
+         <origin xyz="0.02 0 0.3" rpy="0 0 0" /> 
+     
+     </joint>-->
+     
      <link name="camera_link_optical">
      </link>
 

@@ -579,3 +579,33 @@ ros2 launch my_robot_description display.launch.xml
  <div style="text-align:center;">
     <img src="image/17.png" alt="17" width="800">
 </div>
+
+## Marker Detection ROS2
+
+
+
+Δημιουργια ενος καινουργιου αρχειου ``qr.py ``
+κανω 
+```shell
+colcon build
+colcon build --symlink-install
+```
+
+μετα   
+```shell 
+source install/setup.bash
+```
+και τελος 
+```shell
+ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
+```
+και σε αλλο τερματικο 
+
+```shell
+ros2 run robot_controller qr
+```
+
+</div>
+ <div style="text-align:center;">
+    <img src="image/18.png" alt="18" width="800">
+</div>

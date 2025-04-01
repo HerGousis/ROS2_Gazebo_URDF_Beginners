@@ -11,7 +11,7 @@ class Camera:
     def __init__(self, node):
         self.node = node  # ROS2 node για logging
         self.bridge = CvBridge()
-        self.image_folder_path = "/home/hercules/my_robot_description/image_data/"
+        self.image_folder_path = "/home/hercules/data/image_data/"
 
     def delete_old_images(self):
         if os.path.exists(self.image_folder_path):
