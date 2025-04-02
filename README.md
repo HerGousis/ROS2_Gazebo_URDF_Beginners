@@ -609,3 +609,37 @@ ros2 run robot_controller qr
  <div style="text-align:center;">
     <img src="image/18.png" alt="18" width="800">
 </div>
+
+## Locating the point of the object with marker in rviz ROS2
+
+</div>
+ <div style="text-align:center;">
+    <img src="image/20.png" alt="20" width="800">
+</div>
+
+Δημιουργια ενος καινουργιου αρχειου ``marker_kalo.py ``
+κανω 
+```shell
+colcon build
+colcon build --symlink-install
+```
+
+μετα   
+```shell 
+source install/setup.bash
+```
+και τελος 
+```shell
+ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
+```
+και σε αλλο τερματικο 
+
+```shell
+ros2 run robot_controller marker_kalo
+```
+
+</div>
+ <div style="text-align:center;">
+    <img src="image/19.png" alt="19" width="800">
+</div>
+
