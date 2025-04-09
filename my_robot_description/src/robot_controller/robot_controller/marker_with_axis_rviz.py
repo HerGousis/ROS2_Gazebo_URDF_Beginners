@@ -53,7 +53,7 @@ class ArucoDetector(Node):
                 # Δημιουργία και δημοσίευση μηνύματος PoseStamped
                 pose_msg = PoseStamped()
                 pose_msg.header.stamp = self.get_clock().now().to_msg()
-                pose_msg.header.frame_id = "camera_link"  # ΠΡΟΣΑΡΜΟΣΕ το frame αν χρειάζεται
+                pose_msg.header.frame_id = "camera_link_optical"  # ΠΡΟΣΑΡΜΟΣΕ το frame αν χρειάζεται
 
                 # Θέση marker
                 pose_msg.pose.position.x = float(tvecs[i][0][0])

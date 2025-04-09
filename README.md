@@ -542,8 +542,10 @@ python3 generate_markers_model.py -i /home/hercules/gazebo_models/ar_tags -s 100
     <img src="image/14.png" alt="14" width="800">
 </div>
 
-## Add UR5 and robot in RVIZ (file .Xacro)
-
+## Add UR5 and robot in RVIZ and Gazebo (file .Xacro)
+<div style="text-align:center;">
+    <img src="image/15.png" alt="15" width="800">
+</div>
 Δημιουργια ενος καινουργιου αρχειου ``ur5.xacro ``
 και προσθηκη στο αρχειο `` my_robot.urdf.xacro``
 γραφοντας 
@@ -565,8 +567,9 @@ source install/setup.bash
 ros2 launch my_robot_description display.launch.xml 
 ```
 
+ 
  <div style="text-align:center;">
-    <img src="image/15.png" alt="15" width="800">
+    <img src="image/21.png" alt="21" width="800">
 </div>
 
 ## COLMAP

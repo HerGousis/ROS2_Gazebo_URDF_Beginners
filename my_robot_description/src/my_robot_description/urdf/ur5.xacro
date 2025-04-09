@@ -31,8 +31,8 @@
    <xacro:property name="upper_arm_pitch" value="0" />
    <xacro:property name="upper_arm_yaw" value="0" />
 
-   <xacro:property name="shoulder_lift_lower_limit" value="-6.2832" />
-   <xacro:property name="shoulder_lift_upper_limit" value="6.2832" />
+   <xacro:property name="shoulder_lift_lower_limit" value="${-pi/2}" />
+   <xacro:property name="shoulder_lift_upper_limit" value="0" />
    <xacro:property name="shoulder_lift_velocity_limit" value="3.1416" />
    <xacro:property name="shoulder_lift_effort_limit" value="150.0" />
 
@@ -102,7 +102,7 @@
 
 
 
-
+    
 
   <xacro:macro name="cylinder_inertial2" params="radius length mass *origin">
     <inertial>
@@ -115,80 +115,12 @@
   </xacro:macro>
 
 
-    <xacro:macro name="ur5_transmission" params="prefix">
-
-    <transmission name="${prefix}shoulder_pan_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}shoulder_pan_joint">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}shoulder_pan_motor">
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="${prefix}shoulder_lift_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}shoulder_lift_joint">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}shoulder_lift_motor">
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="${prefix}elbow_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}elbow_joint">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}elbow_motor">
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="${prefix}wrist_1_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}wrist_1_joint">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}wrist_1_motor">
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="${prefix}wrist_2_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}wrist_2_joint">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}wrist_2_motor">
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="${prefix}wrist_3_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}wrist_3_joint">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}wrist_3_motor">
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-  </xacro:macro>
-  <xacro:ur5_transmission 
-      prefix=""
-    />
-
- 
  <link name="base_ur5" >
    
     <visual>
         <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/visual/base.dae" />
+         <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/visual/base.dae"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.7 0.7 0.7 1.0"/>
@@ -197,19 +129,19 @@
     <collision>
         <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/collision/base.stl" />
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/collision/base.stl"/>
         </geometry>
     </collision>
     <xacro:cylinder_inertial2 radius="${base_inertia_radius}" length="${base_inertia_length}" mass="${base_mass}">
         <origin xyz="0 0 0" rpy="0 0 0" />
       </xacro:cylinder_inertial2>
  </link>
-
+ 
  <link name="shoulder_link">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/visual/shoulder.dae"/>
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/visual/shoulder.dae"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.7 0.7 0.7 1.0"/>
@@ -218,7 +150,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/collision/shoulder.stl"/>
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/collision/shoulder.stl"/>
         </geometry>
       </collision>
       <xacro:cylinder_inertial2 radius="${shoulder_inertia_radius}" length="${shoulder_inertia_length}" mass="${shoulder_mass}">
@@ -231,7 +163,7 @@
       <visual>
         <origin xyz="0 0 ${shoulder_offset}" rpy="${pi/2} 0 ${-pi/2}"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/visual/upperarm.dae"/>
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/visual/upperarm.dae"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.7 0.7 0.7 1.0"/>
@@ -240,7 +172,7 @@
       <collision>
         <origin xyz="0 0 ${shoulder_offset}" rpy="${pi/2} 0 ${-pi/2}"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/collision/upperarm.stl"/>
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/collision/upperarm.stl"/>
         </geometry>
       </collision>
       <xacro:cylinder_inertial2 radius="${upperarm_inertia_radius}" length="${upperarm_inertia_length}" mass="${upper_arm_mass}">
@@ -252,7 +184,7 @@
       <visual>
         <origin xyz="0 0 ${elbow_offset}" rpy="${pi/2} 0 ${-pi/2}"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/visual/forearm.dae"/>
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/visual/forearm.dae"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.7 0.7 0.7 1.0"/>
@@ -261,7 +193,7 @@
       <collision>
         <origin xyz="0 0 ${elbow_offset}" rpy="${pi/2} 0 ${-pi/2}"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/collision/forearm.stl"/>
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/collision/forearm.stl"/>
         </geometry>
       </collision>
       <xacro:cylinder_inertial2 radius="${forearm_inertia_radius}" length="${forearm_inertia_length}"  mass="${forearm_mass}">
@@ -273,7 +205,7 @@
       <visual>
         <origin xyz="0 0 ${wrist_1_visual_offset}" rpy="${pi/2} 0 0"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/visual/wrist1.dae"/>
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/visual/wrist1.dae"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.7 0.7 0.7 1.0"/>
@@ -282,7 +214,7 @@
       <collision>
         <origin xyz="0 0 ${wrist_1_visual_offset}" rpy="${pi/2} 0 0"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/collision/wrist1.stl"/>
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/collision/wrist1.stl"/>
         </geometry>
       </collision>
       <xacro:cylinder_inertial2 radius="${wrist_1_inertia_radius}" length="${wrist_1_inertia_length}"  mass="${wrist_1_mass}">
@@ -295,7 +227,7 @@
       <visual>
         <origin xyz="0 0 ${wrist_2_visual_offset}" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/visual/wrist2.dae"/>
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/visual/wrist2.dae"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.7 0.7 0.7 1.0"/>
@@ -304,7 +236,7 @@
       <collision>
         <origin xyz="0 0 ${wrist_2_visual_offset}" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/collision/wrist2.stl"/>
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/collision/wrist2.stl"/>
         </geometry>
       </collision>
       <xacro:cylinder_inertial2 radius="${wrist_2_inertia_radius}" length="${wrist_2_inertia_length}"  mass="${wrist_2_mass}">
@@ -316,7 +248,7 @@
       <visual>
         <origin xyz="0 0 ${wrist_3_visual_offset}" rpy="${pi/2} 0 0"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/visual/wrist3.dae"/>
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/visual/wrist3.dae"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.7 0.7 0.7 1.0"/>
@@ -325,20 +257,20 @@
       <collision>
         <origin xyz="0 0 ${wrist_3_visual_offset}" rpy="${pi/2} 0 0"/>
         <geometry>
-          <mesh filename="package://my_robot_description/meshes/collision/wrist3.stl"/>
+          <mesh filename="file:///home/hercules/my_robot_description/install/my_robot_description/share/my_robot_description/meshes/collision/wrist3.stl"/>
         </geometry>
       </collision>
       <xacro:cylinder_inertial2 radius="${wrist_3_inertia_radius}" length="${wrist_3_inertia_length}"  mass="${wrist_3_mass}">
         <origin xyz="0.0 0.0 ${-0.5 * wrist_3_inertia_length}" rpy="0 0 0" />
       </xacro:cylinder_inertial2>
-  </link>
+  </link>  
 
    <!--<link name="base_footprint"/> -->
     <joint name="base_joint2" type="fixed">
         <parent link="lidar_link2" />
         <child link ="base_ur5" />
         
-        <origin xyz ="0 0 ${lidar_length2 }" rpy="0 0 ${pi}" />
+        <origin xyz ="0 0 ${lidar_length2 }" rpy="0 0 ${-pi}" />
     </joint> 
 
     <joint name="shoulder_pan_joint" type="revolute">
@@ -419,15 +351,15 @@
       </xacro:if>
       <dynamics damping="1.0" friction="1.0"/>
     </joint>
+ 
 
-
-    <gazebo>
+   <gazebo>
     <plugin name="gazebo_ros_joint_state_publisher"
         filename="libgazebo_ros_joint_state_publisher.so">
-      <!-- Update rate in Hertz -->
+      
        <update_rate>10</update_rate>
 
-      <!-- Name of joints in the model whose states will be published. -->
+     
        <joint_name>shoulder_pan_joint</joint_name>
        <joint_name>shoulder_lift_joint</joint_name>
        <joint_name>elbow_joint</joint_name>
@@ -437,5 +369,13 @@
 
     </plugin>
   </gazebo>
+
+  <gazebo>
+        <plugin name="joint_pose_trajectory_controller"
+                filename="libgazebo_ros_joint_pose_trajectory.so">
+            <!-- Update rate in Hz -->
+            <update_rate>2</update_rate>
+        </plugin>
+    </gazebo>
 
 </robot>
