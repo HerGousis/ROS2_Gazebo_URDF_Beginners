@@ -546,6 +546,7 @@ python3 generate_markers_model.py -i /home/hercules/gazebo_models/ar_tags -s 100
 <div style="text-align:center;">
     <img src="image/15.png" alt="15" width="800">
 </div>
+
 Δημιουργια ενος καινουργιου αρχειου ``ur5.xacro ``
 και προσθηκη στο αρχειο `` my_robot.urdf.xacro``
 γραφοντας 
@@ -565,6 +566,10 @@ source install/setup.bash
 και τελος 
 ```shell
 ros2 launch my_robot_description display.launch.xml 
+```
+ή
+```shell
+ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
 ```
 
  
