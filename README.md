@@ -588,9 +588,20 @@ ros2 launch my_robot_description display.launch.xml
     <img src="image/17.png" alt="17" width="800">
 </div>
 
+## RealityCapture
+Απο τις εικονες που αποθηκευτηκαν και με χρηση του ```RealityCapture```
+μπορουμε να κανουμε εξαγωγη του 3D αντικειμενου 
+ <div style="text-align:center;">
+    <img src="image/22.jpg" alt="22" width="800">
+</div>
+
+και μεσω του ```MeshLab``` μπορουμε να δουμε το 3D αντικειμενο που κατασκευαστηκε 
+
+ <div style="text-align:center;">
+    <img src="image/22.png" alt="22" width="800">
+</div>
+
 ## Marker Detection ROS2
-
-
 
 Δημιουργια ενος καινουργιου αρχειου ``qr.py ``
 κανω 
