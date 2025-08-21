@@ -636,10 +636,7 @@ in a separate terminal:
 ros2 run robot_controller marker_kalo
 ```
 
-</div>
- <div style="text-align:center;">
-    <img src="image/19.png" alt="19" width="800">
-</div>
+
 
 ## RANSAC-3D and marker-based detection to guide the robot to the target object.
 
