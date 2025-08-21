@@ -482,7 +482,8 @@ The ``go_with_laser.py`` or ``go_with_lidar.py`` file makes the robot move aroun
 It also saves the LiDAR readings recorded during the simulation in the ``laser_data`` folder.
 Finally, using OpenCV, it saves a photo every 10 seconds in the image_data folder.
 When I run ``go_with_laser.py`` or ``go_with_lidar.py`` again, it deletes the old photos, adds new ones, and updates the `` laser_data.txt `` file.
-https://github.com/user-attachments/assets/7c2a3cc9-6bfc-4115-971e-3b9456bf6529
+
+![Image](https://github.com/user-attachments/assets/7c2a3cc9-6bfc-4115-971e-3b9456bf6529)
 
 ## SLAM spatial mapping
 
@@ -501,7 +502,8 @@ in the third one: ```hercules@hercules:~/my_robot_description$```
 ros2 run robot_controller go_with_lidar 
 ```
 
-![Image](https://github.com/user-attachments/assets/e8c8144e-08a0-4d4b-b57c-d2e08d5c6eba)
+![Image](https://github.com/user-attachments/assets/6f019e28-02d1-4efb-adf9-2cd26e59a102)
+
 
 ## Add Qr and Object στο Gazebo
 ### Qr
