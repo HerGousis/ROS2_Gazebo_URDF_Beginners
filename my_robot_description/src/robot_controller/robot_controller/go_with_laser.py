@@ -24,7 +24,7 @@ class SLAMIntegration(Node):
             10)
         
         # Δημοσίευση των δεδομένων στο /scan
-        self.scan_publisher = self.create_publisher(LaserScan, '/scan', 10)
+        self.scan_publisher = self.create_publisher(LaserScan, '/gazebo_ros_ray_sensor2/out', 10)
 
     def lidar_callback(self, msg):
         self.scan_publisher.publish(msg) 

@@ -25,7 +25,10 @@ setup(
             "go_with_lidar=robot_controller.go_with_lidar:main",
             "qr=robot_controller.qr:main",
             "marker_with_axis_rviz=robot_controller.marker_with_axis_rviz:main",
-            "aruco_kalo=robot_controller.aruco_kalo:main"
+            "aruco_kalo=robot_controller.aruco_kalo:main",
+            "ca=robot_controller.ca:main",
+            "ransac=robot_controller.ransac:main"
+            
         ],
     },
 )

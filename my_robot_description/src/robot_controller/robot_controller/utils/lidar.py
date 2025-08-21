@@ -30,11 +30,11 @@ class Lidar:
             if average_distance < self.safe_distance:
                 self.node.get_logger().info(f"Too close! Distance: {average_distance:.2f}. Turning right...")
                 twist.linear.x = 0.2
-                twist.angular.z = -0.5  
+                twist.angular.z = -0.25  
             elif average_distance > self.safe_distance:
                 self.node.get_logger().info(f"Too far! Distance: {average_distance:.2f}. Turning left...")
                 twist.linear.x = 0.2
-                twist.angular.z = 0.5  
+                twist.angular.z = 0.25  
             else:
                 self.node.get_logger().info(f"At the right distance: {average_distance:.2f}. Moving forward...")
                 twist.linear.x = 0.2

@@ -1,36 +1,29 @@
-# ROS2 για  Αρχάριους 2
-Αρχικα θα δούμε πως δημιουργούμε κοσμο στο Gazebo , Να φτιαξουμε ενα δικο μας robot car και να το δουμε στο RVIZ και στο Gazebo
+ο»Ώ# ROS2 for Beginners 2
+First, weβll see how to create a world in Gazebo, build our own robot car, and view it in RViz and Gazebo.
 
 ## Gazebo Create World
 ### Install Gazebo 
-1. Ανοιγουμε το τερματικο και γραφουμε 
+1. Open the terminal and type:
      ```shell
      sudo apt install ros-humble-gazebo-*
      ```
-  κλεινω και ξανα ανοιγω το τερματικο 
+  Close and reopen the terminal
 
 ### Gazibo world
 
-2. Για να το καλεσω γραφω gazebo
-στο Insert 
-εχει Add Path
-στο http://models.gazebosim.org/
-εχει αντικειμενα ετοιμα απο το gazebo
+2. To launch it, type gazebo.
+In Insert, thereβs Add Path.
+At http://models.gazebosim.org/
+ you can find ready-made Gazebo models.
 
-3. Για να δημιουργησω τοίχους
-=> edit => Building Editor 
-σχεδιαζουμε τους τοιχους και για να το κανουμε save 
-=>file =>Save As(Ctrl+Shift+S) => βαζουμε το ονομα και που θελουμε να το αποθηκευσουμε 
-και Save =>Exit (το επομενο παραθυρο )
+3. To create walls: Edit β Building Editor.
+Draw the walls, and to save: File β Save As (Ctrl+Shift+S) β enter the name and where to save β Save β Exit (in the next window).
 
-4. Για απθηκευση World 
-File => Save World As => βαζω το οναμα(name.world) και την τοποθεσια  και => Save
+4. To save the world: File β Save World As β enter the name (name.world) and location β Save.
 
-
-Για ανοιξω το κοσμο που δημιουργησα πρεπει να ειμαι στον φακελο που τον αποθηκευσα 
+To open the world you created, you need to be in the folder where you saved it
 (hercules@hercules:~/gazebo_examples$)
-
-και να γραψω στο terminal 
+and type in the terminal:
  ```shell
    gazebo (name.world)
 ```
@@ -40,29 +33,28 @@ File => Save World As => βαζω το οναμα(name.world) και την τοποθεσια  και => Sav
 
 ## Create My Robot URDF
 ### Setup the URDF File
-1. Δημιουργω εναν φακελο με ονομα my_robot
+1. I create a folder named my_robot.
 
-μεσα στον φακελο γραφω :
+Inside the folder, I type:
 
  ```shell
    touch my_robot.urdf
    code my_robot.urdf
 ```
 
-2. ανοιγει στο visual code  και γραφω τον κωδικα (υπαχρει στο αρχειο my_robot.urdf στον φακελο my_robot)
+2. Open it in Visual Studio Code and write the code (itβs in the `my_robot.urdf` file inside the my_robot folder).
 
-Στο τερματικο κανω
+In the terminal, I run:
 
 ```shell
  ros2 launch urdf_tutorial display.launch.py model:=/home/hercules/my_robot/my_robot.urdf 
 ```
 
+******Notes
 
-******Παρατηρησεις 
+For connecting the wheel, we use the joint type ``type="continuous"``.
 
-Για την ενωση της ρωδας χρησιμοποιουμαι τον τυπο type="continuous" 
-
-Ενω για μελη που δεν θελουμε να εχουν ευκινισια και απλως να ομαδοποιηθουν βαζουμε τον τυπο type="fixed"
+For parts we donβt want to be movable and just want to group, we use `type="fixed"`.
 
  <div style="text-align:center;">
     <img src="image/3.png" alt="3" width="800">
@@ -70,53 +62,54 @@ File => Save World As => βαζω το οναμα(name.world) και την τοποθεσια  και => Sav
 
 ##  URDF+Xacro creation ,Visualize in RVIZ2 and Gazebo +Teleoperation
 
-1. φταχνω εναν φακελο learn_ros2_ws και src  μετα μπαινω στο src και γραφω
+1. I create a folder learn_ros2_ws and a src subfolder.
+ Then I go into src and type:
 ```shell
-  ros2 pkg create --build-type ament_cmake --node-name my_node my_first_pkg (ονομα αρχειου το my_first_pkg)
+  ros2 pkg create --build-type ament_cmake --node-name my_node my_first_pkg (ΞΏΞ½ΞΏΞΌΞ± Ξ±ΟΟΞ΅ΞΉΞΏΟ ΟΞΏ my_first_pkg)
 ```
 
-****Αν εχω ERRORS****
+****If I get ERRORS****
 ```shell
   nano /home/hercules/learn_ros2_ws/src/my_first_pkg/package.xml
 ```
-
-και συμπληρωνω 
-Βρείτε την ετικέτα:
+and I fill in
+Find the label:
 ```shell
 <license>TODO: License declaration</license>
 ```
-Αντικαταστήστε τη με μία από τις προτεινόμενες άδειες χρήσης που υποστηρίζονται από το ament:
+Replace it with one of the recommended licenses supported by ament.
 
-Για παράδειγμα, αν χρησιμοποιείτε Apache 2.0:
+For example, if youβre using Apache 2.0:
+
 ```shell
 <license>Apache-2.0</license>
 cd ..
 ```
 
-Για πληρότητα, δημιουργήστε ένα αρχείο LICENSE στο φάκελο του πακέτου σας:
+For completeness, create a LICENSE file in your package folder:
 
 ```shell
 touch /home/hercules/learn_ros2_ws/src/my_first_pkg/LICENSE
 ```
 
-Βήμα 4: Επανεκτέλεση της κατασκευής
+Step 4: Re-running the build
 
-Αποθηκεύστε τις αλλαγές και επαναλάβετε την κατασκευή:
+Save the changes and rerun the build:
 
 ```shell
 colcon build 
 ```
 
-και για να τρεξω το αρχειο  urdf πρεπει να ειμαι εξω απο τον φακελο και τρεχω την εντολη :
+And to run the URDF file, I need to be outside the folder and run the command:
 ```shell
 ros2 launch urdf_tutorial display.launch.py model:=/home/hercules/learn_ros2_ws/src/my_first_pkg/urdf/my_robot1.urdf 
 ```
-μετα φτιαχνω τρεισ φακελους ```include```  , ```launch``` , ```rviz```  μεσα στο ```my_first_pkg```
-μετα ξανα τρεχω το αρχειο ```.urdf``` και κανω save στο φακελο ```rviz```
-μετα στο launch δημιουργω δυο αρχεια .py  (```display.launch.py``` && ```gazebo.launch.py``` )
-και αυτα τα αρχεια θα τερχω απο δω και στο εξης 
 
-παω επισης και στο αρχειο CMakeList.txt  και συμπληρωνω αυτο 
+Then I create three foldersβ``include``, ``launch``, and ``rviz``βinside`` my_first_pkg``.
+Then I rerun the ``.urdf`` file and save it in the ``rviz`` folder.
+Next, in launch I create two .py files (``display.launch.py`` and ``gazebo.launch.py``), and Iβll run these files from now on.
+
+I also go to the ``CMakeLists.txt`` file and add this:
 ```shell
 #install launch files
 install(DIRECTORY
@@ -127,34 +120,32 @@ install(DIRECTORY
 )
 ```
 
-Στην συνεχεια παω στο τερματικο  κανω ```cd``` 
-οσπου να ειμαι στον  φακελος ```learn_ros2_ws``` κανω ```ls``` 
-και ξανα κανω  : 
+Next, I go to the terminal, run ``cd`` until Iβm in the ``learn_ros2_ws`` folder, run ``ls``, and then run again:
 ```shell
  colcon build
  ```
-μετα 
+after
 ```shell 
 colcon build --symlink-install
 source install/local_setup.bash
 ```
 
-και στην συνεχεια κανω τα εξης :
+And then I do the following:
 ```shell
-gedit ~/.bashrc  (Ανοιγει το αρχειο bashrc)
+gedit ~/.bashrc  (ΞΞ½ΞΏΞΉΞ³Ξ΅ΞΉ ΟΞΏ Ξ±ΟΟΞ΅ΞΉΞΏ bashrc)
 ```
 
-και συμπληρωνω αυτο : ```source ~/learn_ros2_ws/install/setup.bash```
-και γραφω στο terminal :
+And I add this: ``source ~/learn_ros2_ws/install/setup.bash``
+and in the terminal I type:
 ```shell
 source .bashrc
 ```
-και πρεπει να βγαινει ετσι :
+and it should look like this:
 ```shell
 hercules@hercules:~$ source .bashrc
 hercules@hercules:~$ 
 ```
-Τελος για να το τρεξω  
+Finally, to run it: 
 
 ```shell
 ros2 launch my_first_pkg display.launch.py
@@ -163,7 +154,7 @@ ros2 launch my_first_pkg display.launch.py
     <img src="image/2.png" alt="2" width="800">
 </div>
 
-ή  για να τρεξω στο gazebo γραφω :
+Or, to run it in Gazebo, I type:
 
 ```shell
 ros2 launch my_first_pkg gazebo.launch.py
@@ -173,12 +164,12 @@ ros2 launch my_first_pkg gazebo.launch.py
 </div>
 
 
-## Χειρισμός με το πληκτρολόγιο του PC
-Σε αλλο τερματικο
+## Keyboard control from the PC
+In a separate terminal window
 ```shell
  ros2 topic list 
  ```
- και θα πρεπει να εμφανιζει τα εξης :
+ and it should display the following:
 ```
 /clock
 /cmd_vel
@@ -191,12 +182,12 @@ ros2 launch my_first_pkg gazebo.launch.py
 /tf
 /tf_static
 ```
-και μετα 
+and after
 ```shell
 ros2 run teleop_twist_keyboard teleop_twist_keyboard 
 ```
 
-και θα πρεπει να εμφανιζει τα εξης :
+and it should display the following:
 ```
 This node takes keypresses from the keyboard and publishes them
 as Twist/TwistStamped messages. It works best with a US keyboard layout.
@@ -226,28 +217,27 @@ CTRL-C to quit
 currently:	speed 0.5	turn 1.0 
 ```
 
-### Αν υπαρχει θεμα Επανεκτέλεσης
+### If thereβs an issue re-running
 
-στο τερματικο γραφω
+In the terminal, I type:
 ```shell
 ps aux | grep gazebo
 ```
-βλεπω τις διεργασιες 
-και σκοτωνω την πρωτη  με την εντολη ```kill -9 <pid>```
-ξανα  στο τερματικο γραφω
+I check the running processes
+and kill the first one with the command `kill -9 <pid>`.
+Then, in the terminal, I type again:
 ```shell
 ps aux | grep gazebo
 ```
-και πρπει να εχει μια και οχι αλλες 
-και ξανα τρεχω τον κωδικα 
+and it should show only one (process), not others; then I run the code again.
 
-### Για χρωματα στο robot
+### Robot colors
 http://wiki.ros.org/simulator_gazebo/Tutorials/ListOfMaterials
 
-### Για γεωμετρια του robot
+### Defining the robotβs geometry
 http://wiki.ros.org/urdf/XML/link
 
-### Για ενωση κομματιων του robot 
+### Assembling robot components 
 http://wiki.ros.org/urdf/XML/joint
 
 ## Create Robot Arm in RVIZ (file .Xacro)
@@ -256,83 +246,81 @@ http://wiki.ros.org/urdf/XML/joint
     <img src="image/5.png" alt="5" width="800">
 </div>
 
-1. Δημιουργω εναν φακελο braxionas και μεσα σε αυτον εναν φακελο src
+1. I create a folder named ``braxionas`` and, inside it, a ``src`` folder.
 ```shell
 colcon build
 ```
-1.  μεσα στο src εκτελω την εντολη
+1.  Inside the ``src`` folder, I run the command:
  ```shell
 ros2 pkg create braxionas
 ```
-Διαγραφω τους φακελους include , src και φτιαχνω launch , urdf ,meshes , rviz  
-Διαμορφωνω το αρχειο ```CMakeLists.txt``` καταλληλα και μετα 
+I delete the ``include`` and ``src`` folders and create ``launch``, ``urdf``, ``meshes``, and ``rviz``.
+I configure the ``CMakeLists.txt`` file appropriately, and thenβ¦
 
-1. Ανοιγω το αρχειο bashrc
+1. I open the .bashrc file.
 ```shell
 gedit ~/.bashrc
 ```
 ```shell
 source ~/braxionas/install/setup.bash
 ```
-και μετα στον φακελο braxionas (log install src build)
+and then in the braxionas folder (``log``, ``install``, ``src``, ``build`` ).
 
 ```shell
 colcon build
 colcon build --symlink-install
 ```
-
-μετα   ```source install/setup.bash```
+after   ```source install/setup.bash```
 
 ```shell
 ros2 launch braxionas display.launch.xml
 ```
-ή
+or
 ```shell
 ros2 launch braxionas display.launch.py
 ```
 
-και το αποτελεσμα ειναι :
+and the result is:
  <div style="text-align:center;">
     <img src="image/6.png" alt="6" width="800">
 </div>
 
 ### NOTES
-Τα αχρεια .stl υπαρχουν και στα [Repositories](https://github.com/HerGousis/Robotic_ARM)
+The ``.stl`` files also exist in the [Repositories](https://github.com/HerGousis/Robotic_ARM)
 
 ## Robot in the  my world (Gazebo) 
 
-1. Δημιουργω εναν φακελο my_robot_description  και μεσα σε αυτον εναν φακελο src
+1. I create a folder named ``my_robot_description`` and, inside it, a ``src`` folder.
 ```shell
 colcon build
 ```
-  Μετα προσθετουμετουμε τα αρχεια που ειναι ανεβασμενα στο φακελο ```my_robot_description/src ```
-Επειτα γραφω στον φακελο  my_robot_description (log install src build)
+  Then we add the files that are uploaded to the ``my_robot_description/src`` folder.
+Next, in the`` my_robot_description`` folder (``log``, ``install``, ``src``, ``build`` ), I type:
 
 ```shell
 colcon build
 colcon build --symlink-install
 ```
-
-μετα   
+after  
 ```shell 
 source install/setup.bash
 ```
-και τελος 
+and finally:
 ```shell
 ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
 ```
 
-και σε αλλο τερματικο  
+in a separate terminal 
 ```shell
 ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5},angular:{z: 0}}" 
 ```
-και θα δουμε να κινειται κατα τον αξονα Χ μεσα στο κοσμο που εχουμε δημιουργησει
+and weβll see it move along the X-axis within the world weβve created.
 
-ή 
+or 
 ```shell
 ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5},angular:{z: 0.5}}" 
 ```
-θα δουμε οτι κινειται κυκλικα 
+weβll observe circular motion
 
  <div style="text-align:center;">
     <img src="image/7.png" alt="7" width="800">
@@ -340,20 +328,19 @@ ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5},angular:{z: 0
 
 ## Add Camera in Gazebo 
 
-1. Μεσα στο φακελο urdf ```my_robot_description/src/my_robot_description/urdf```
- Προσθετουμε ενα ακομα αρχειο ``` camera.xacro ``` και το συμπληρωνουμε στο αχρειο ``` my_robot.urdf.xacro```
-Επειτα γραφω στον φακελο  my_robot_description (log install src build)
+1. Inside the ``urdf`` folder (``my_robot_description/src/my_robot_description/urdf``), add one more file,``camera.xacro``, and include it in the ``my_robot.urdf.xacro`` file.
+Then, in the ``my_robot_description`` folder (``log``, ``install``, ``src``, ``build`` ), I type:
 
 ```shell
 colcon build
 colcon build --symlink-install
 ```
 
-μετα   
+after
 ```shell 
 source install/setup.bash
 ```
-και τελος 
+and finally:
 ```shell
 ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
 ```
@@ -362,22 +349,22 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
     <img src="image/8.png" alt="8" width="800">
 </div>
 
-* Στο rviz για να προσθεσουμε την καμερα πηγενουμε ```Add``` και επιλεγω το ```Image``` και στην συνεχεια στο ```Topic``` επιλεγω την καμερα μου .
+* In RViz, to add the camera, click ``Add``, choose ``Image``, and then under `` Topic `` select your camera.
 
 ## Add lidar
 
-Δημιουγρουμε ενα καινουριγιο αρχειο liadr.xacro και το προσθετουμε στο ```my_robot.urdf.xacro```
+We create a new file ``lidar.xacro`` and add it to ```my_robot.urdf.xacro```
 
 ```shell
 colcon build
 colcon build --symlink-install
 ```
 
-μετα   
+after   
 ```shell 
 source install/setup.bash
 ```
-και τελος 
+and finally:
 ```shell
 ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
 ```
@@ -386,7 +373,7 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
     <img src="image/9.png" alt="9" width="800">
 </div>
 
-* για το ROS2 στο lidar.xacro             
+* Regarding ROS 2 in ``lidar.xacro`` )            
  ```shell
  <plugin name="gazebo_ros_ray_sensor" filename="libgazebo_ros_ray_sensor.so">
      <topic_name>/scan</topic_name>
@@ -403,33 +390,33 @@ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
     <img src="image/11.png" alt="11" width="800">
 </div>
 
-* Στο rviz για να προσθεσουμε την καμερα πηγενουμε ```Add``` και επιλεγω το ```By topic``` και στην συνεχεια στο ```LaserScan``` επιλεγω την καμερα μου .
+* Note: If you mean LiDAR, pick ``LaserScan`` and select the LiDAR topic (e.g., ``/scan`` ). For a camera feed, choose ``Image`` instead of ``LaserScan``
 
 
 
 ## Install OpenCV
 
-στο Τερματικο γραφω :
+In the terminal, I type:
 ```shell
 pip install opencv-python
 ```
-και μετα 
+and after
 ```shell
 sudo apt install ros-humble-cv-bridge
 ```
 ## Create Python Script 
 
- Γραφω στον φακελο ``` my_robot_description/src ```
+I write in the folder. ``` my_robot_description/src ```
 
  ```shell
  ros2 pkg create robot_controller --build-type ament_python --dependencies rclpy
 ```
 
-και δημιουργειτε ο φακελος ```robot_controller``` 
+and the folder is created. ```robot_controller``` 
 
-* στο αρχειο ```package.xml```
+* in the file ```package.xml```
 
-συμπληρωνω :
+i write:
 
 ```shell
   <depend>rclpy</depend>
@@ -439,8 +426,8 @@ sudo apt install ros-humble-cv-bridge
   <depend>my_robot_description</depend>
 ```
 
-* στο αρχειο ```setup.py```
-συμπληρωνω :
+* in the file ```setup.py```
+i write:
 
 ```shell
      entry_points={
@@ -450,93 +437,91 @@ sudo apt install ros-humble-cv-bridge
         ],
     },
 ```
-* και γραφω τον κωδικα σε αρχειο .py εκει που ειναι το ```__init__.py``` 
+* and I write the code in a ``.py`` file where the```__init__.py``` is  
 
 
-τελος εκτελω στον φακελο ``` my_robot_description/```
+Finally, I execute it in the folder ``` my_robot_description/```
 ```shell
 colcon build
 colcon build --symlink-install
 ```
-και ανοιγω δυο τερματικα μεσα στο φακελο ```my_robot_description``` 
+I open two terminal windows in that folder ```my_robot_description``` 
 
-* στο ενα γραφω 
+* in one terminal, I type: 
 ```shell 
 source install/setup.bash
 ```
-και μετα  
+and after  
 ```shell
 ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
 ```
 
-* στο αλλο 
+* in the other one, I type:
 
 ```shell 
 source install/setup.bash
 ```
-και μετα  
+and after 
 ```shell
 ros2 run robot_controller go_with_laser 
 ```
-ή 
+or
 
 ```shell
 ros2 run robot_controller go
 ```
-ή 
+or
 
 ```shell
 ros2 run robot_controller go_with_lidar 
 ```
 
-Το αρχειο `go_with_lidar.py` καλλει αλλα αρχεια `.py` απο τον φακελο `utils` και ουσιαστικα ειναι το ιδιο Python Script του ` go_with_laser`     
-
+The ``go_with_lidar.py`` file calls other ``.py`` files from the ``utils``  folder and is essentially the same Python script as ``go_with_laser``.
 ### NOTES
-Το αρχειο ```go_with_laser.py``` ή ```go_with_lidar.py```κανει το ρομποτ να κινειτε γυρω απο ενα αντικειμενο κρατοντας σταθερη αποσταση 1.0 
-Επισης αποθηκευει στο φακελο ```laser_data``` τις τιμες που καταγραφει ο lidar κατα την προσομοιωση 
-Τελος μεσω της ```OpenCv``` αποθηκευει καθε 10 δευτερολεπτα μια φωτογραφια μεσα στο φακελο ```image_data``` 
-Και οταν ξανα καλεσω το ```go_with_laser.py``` ή ```go_with_lidar.py``` σβηνει τις παλιες φωτογραφιες και προσθετει καινουργιες και το αρχειο ```laser_data.txt``` αναναιωνεται
-
+The ``go_with_laser.py`` or ``go_with_lidar.py`` file makes the robot move around an object while keeping a constant distance of 1.0.
+It also saves the LiDAR readings recorded during the simulation in the ``laser_data`` folder.
+Finally, using OpenCV, it saves a photo every 10 seconds in the image_data folder.
+When I run ``go_with_laser.py`` or ``go_with_lidar.py`` again, it deletes the old photos, adds new ones, and updates the `` laser_data.txt `` file.
 https://github.com/user-attachments/assets/7c2a3cc9-6bfc-4115-971e-3b9456bf6529
 
 ## SLAM spatial mapping
 
-ανοιγουμε τρια τερματικα
-στο πρωτο ```hercules@hercules:~/my_robot_description$```
+Open three terminals.
+In the first one: ```hercules@hercules:~/my_robot_description$```
   ```shell
  ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
 ```
 
-στο δευτερο ```hercules@hercules:~/my_robot_description$```
+in the second one: ```hercules@hercules:~/my_robot_description$```
   ```shell
 ros2 launch slam_toolbox online_async_launch.py
 ```
-στο τριτο ```hercules@hercules:~/my_robot_description$```
+in the third one: ```hercules@hercules:~/my_robot_description$```
   ```shell
 ros2 run robot_controller go_with_lidar 
 ```
 
 ![Image](https://github.com/user-attachments/assets/e8c8144e-08a0-4d4b-b57c-d2e08d5c6eba)
 
-## Add Qr and Object στο Gazebo
+## Add Qr and Object ΟΟΞΏ Gazebo
 ### Qr
-απο το Github `` https://github.com/mikaelarguedas/gazebo_models``
+from the Github `` https://github.com/mikaelarguedas/gazebo_models``
 
-στο τερματικο κανω
+In the terminal, I run:
  ```shell
 git clone https://github.com/mikaelarguedas/gazebo_models.git
 cd gazebo_models/ar_tags/scripts/
 python3 generate_markers_model.py -i /home/hercules/gazebo_models/ar_tags -s 1000 -w 500 -v
 ```
 
-και ανοιγω το Gazebo και αναζητω το αντικειμενο 
+and I open Gazebo and search for the object.
 
 ### Object 
 
-Προσθετω το αντικειμενο στο Gazebo 
-Πρεπει να εχουμε αρχεια ``.obj`` ``.jpg`` ``.mtl``
+I add the object in Gazebo.
+We need ``.obj``, ``.jpg``, and `` .mtl `` files.
 
-κανω αποθηκευση το κοσμο και αλλαζω οπου χρειαστει στον κωδικα 
+I save the world and update the code wherever necessary.
 
  <div style="text-align:center;">
     <img src="image/14.png" alt="14" width="800">
@@ -547,27 +532,25 @@ python3 generate_markers_model.py -i /home/hercules/gazebo_models/ar_tags -s 100
     <img src="image/15.png" alt="15" width="800">
 </div>
 
-Δημιουργια ενος καινουργιου αρχειου ``ur5.xacro ``
-και προσθηκη στο αρχειο `` my_robot.urdf.xacro``
-γραφοντας 
+Create a new file ``ur5.xacro`` and add it to ``my_robot.urdf.xacro`` by writing:
  ```shell
  <xacro:include filename="ur5.xacro" />
 ```
-κανω 
+i write:
 ```shell
 colcon build
 colcon build --symlink-install
 ```
 
-μετα   
+after  
 ```shell 
 source install/setup.bash
 ```
-και τελος 
+and finally: 
 ```shell
 ros2 launch my_robot_description display.launch.xml 
 ```
-ή
+or
 ```shell
  ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
 ```
@@ -579,8 +562,7 @@ ros2 launch my_robot_description display.launch.xml
 
 ## COLMAP
 
-Απο τις εικονες που αποθηκευτηκαν στο φακελο ``image_data``
-και με χρηση του COLMAP
+From the images saved in the `` image_data ``  folder, and using COLMAP
  <div style="text-align:center;">
     <img src="image/16.png" alt="16" width="800">
 </div>
@@ -589,13 +571,12 @@ ros2 launch my_robot_description display.launch.xml
 </div>
 
 ## RealityCapture
-Απο τις εικονες που αποθηκευτηκαν και με χρηση του ```RealityCapture```
-μπορουμε να κανουμε εξαγωγη του 3D αντικειμενου 
+Using the saved images in `` RealityCapture ``, we can reconstruct and export the 3D object.β
  <div style="text-align:center;">
     <img src="image/22.jpg" alt="22" width="800">
 </div>
 
-και μεσω του ```MeshLab``` μπορουμε να δουμε το 3D αντικειμενο που κατασκευαστηκε 
+With `` MeshLab ``, we can view the 3D model we created
 
  <div style="text-align:center;">
     <img src="image/22.png" alt="22" width="800">
@@ -603,22 +584,22 @@ ros2 launch my_robot_description display.launch.xml
 
 ## Marker Detection ROS2
 
-Δημιουργια ενος καινουργιου αρχειου ``qr.py ``
-κανω 
+Create a new file `` qr.py `` and then run:
+
 ```shell
 colcon build
 colcon build --symlink-install
 ```
 
-μετα   
+after  
 ```shell 
 source install/setup.bash
 ```
-και τελος 
+and finally: 
 ```shell
  ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
 ```
-και σε αλλο τερματικο 
+in a separate terminal:)
 
 ```shell
 ros2 run robot_controller qr
@@ -636,22 +617,20 @@ ros2 run robot_controller qr
     <img src="image/20.png" alt="20" width="800">
 </div>
 
-Δημιουργια ενος καινουργιου αρχειου ``marker_kalo.py ``
-κανω 
+Create a new file `` marker_kalo.py `` and then run:
 ```shell
 colcon build
 colcon build --symlink-install
 ```
-
-μετα   
+after  
 ```shell 
 source install/setup.bash
 ```
-και τελος 
+and finally:
 ```shell
  ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
 ```
-και σε αλλο τερματικο 
+in a separate terminal:
 
 ```shell
 ros2 run robot_controller marker_kalo
@@ -662,3 +641,30 @@ ros2 run robot_controller marker_kalo
     <img src="image/19.png" alt="19" width="800">
 </div>
 
+## RANSAC-3D and marker-based detection to guide the robot to the target object.
+
+</div>
+ <div style="text-align:center;">
+    <img src="image/23.png" alt="23" width="800">
+</div>
+
+I created a file called ``ransac.py``and then run:
+```shell
+colcon build
+colcon build --symlink-install
+```
+after  
+```shell 
+source install/setup.bash
+```
+and finally:
+```shell
+ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
+```
+in a separate terminal:
+
+```shell
+ros2 run robot_controller ransac
+```
+
+https://github.com/user-attachments/assets/2f50b36e-cfe0-41eb-b17f-04c3f6ffb506
