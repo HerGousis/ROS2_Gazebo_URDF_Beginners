@@ -270,7 +270,7 @@
         <parent link="lidar_link2" />
         <child link ="base_ur5" />
         
-        <origin xyz ="0 0 ${lidar_length2 }" rpy="0 0 ${-pi}" />
+        <origin xyz ="0 0 ${lidar_length2}" rpy="0 0 ${-pi}" />
     </joint> 
 
     <joint name="shoulder_pan_joint" type="revolute">

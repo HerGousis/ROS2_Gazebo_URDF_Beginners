@@ -13,7 +13,7 @@
     <xacro:include filename="lidar2.xacro" /> 
 
 
-    <!--xacro:include filename="ur5.xacro"  -->
+    <xacro:include filename="ur5.xacro" />
     
 
 

@@ -667,3 +667,22 @@ ros2 run robot_controller ransac
 ```
 
 https://github.com/user-attachments/assets/2f50b36e-cfe0-41eb-b17f-04c3f6ffb506
+
+## ROS2 Moveit_2_Control a Robotic Arm
+
+Inside the `src` we put the folder `my_robot_moveit_config`
+
+and then run:
+```shell
+colcon build
+colcon build --symlink-install
+```
+after  
+```shell 
+source install/setup.bash
+```
+and finally:
+```shell
+ ros2 launch my_robot_moveit_config demo.launch.py 
+```
+![Image](https://github.com/user-attachments/assets/0442bae0-1f62-4464-8f9b-f21401021e6f)
