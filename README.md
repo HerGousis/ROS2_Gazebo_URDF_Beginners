@@ -1,5 +1,5 @@
 ﻿# ROS2 for Beginners 2
-First, we’ll see how to create a world in Gazebo, build our own robot car, and view it in RViz and Gazebo.
+First, we’ll see how to create a world in Gazebo, build our own robot car, and view it in RViz and Gazebo .
 
 ## Gazebo Create World
 ### Install Gazebo 
