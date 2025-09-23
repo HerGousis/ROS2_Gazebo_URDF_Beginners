@@ -8,7 +8,7 @@ First, we’ll see how to create a world in Gazebo, build our own robot car, and
      sudo apt install ros-humble-gazebo-*
      ```
   Close and reopen the terminal
-
+   
 ### Gazibo world
 
 2. To launch it, type gazebo.
