@@ -27,7 +27,9 @@ setup(
             "marker_with_axis_rviz=robot_controller.marker_with_axis_rviz:main",
             "aruco_kalo=robot_controller.aruco_kalo:main",
             "ca=robot_controller.ca:main",
-            "ransac=robot_controller.ransac:main"
+            "ransac=robot_controller.ransac:main",
+            "go_dokari=robot_controller.go_dokari:main",
+            "go_with_arm=robot_controller.go_with_arm:main"
             
         ],
     },

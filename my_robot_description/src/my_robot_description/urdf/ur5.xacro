@@ -270,7 +270,7 @@
         <parent link="lidar_link2" />
         <child link ="base_ur5" />
         
-        <origin xyz ="0 0 ${lidar_length2}" rpy="0 0 ${-pi}" />
+        <origin xyz ="0 0 ${lidar_length2}" rpy="0 0 ${-pi/2}" />
     </joint> 
 
     <joint name="shoulder_pan_joint" type="revolute">
@@ -357,7 +357,7 @@
     <plugin name="gazebo_ros_joint_state_publisher"
         filename="libgazebo_ros_joint_state_publisher.so">
       
-       <update_rate>50</update_rate>
+       <update_rate>10</update_rate>
 
      
        <joint_name>shoulder_pan_joint</joint_name>
@@ -374,7 +374,7 @@
         <plugin name="joint_pose_trajectory_controller"
                 filename="libgazebo_ros_joint_pose_trajectory.so">
             <!-- Update rate in Hz -->
-            <update_rate>50</update_rate>
+            <update_rate>2</update_rate>
         </plugin>
     </gazebo>
 

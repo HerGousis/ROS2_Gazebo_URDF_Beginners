@@ -686,3 +686,71 @@ and finally:
  ros2 launch my_robot_moveit_config demo.launch.py 
 ```
 ![Image](https://github.com/user-attachments/assets/0442bae0-1f62-4464-8f9b-f21401021e6f)
+
+
+## ROS2 Robotic Arm with Inverse Kinematics
+
+Inside the `my_robot_description` 
+
+and then run:
+```shell
+colcon build
+colcon build --symlink-install
+```
+
+after  
+```shell 
+source install/setup.bash
+```
+and finally:
+```shell
+ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
+```
+in a separate terminal:
+
+for test: 
+```
+ros2 topic pub  -1 /set_joint_trajectory trajectory_msgs/msg/JointTrajectory '{header:{frame_id: base_arm_link}, joint_names: [arm_base_forearm_joint, forearm_hand_joint], points: [ {positions: {0.0, 0.1}} ] }'
+```
+and with IK :
+
+```shell
+python3 arm_control.py
+```
+
+
+![Image](https://github.com/user-attachments/assets/5501c1ec-950c-4470-9387-5def4679facc)
+
+
+## ROS2 UGV with Robotic_Arm
+
+```shell
+colcon build
+colcon build --symlink-install
+```
+after  
+```shell 
+source install/setup.bash
+```
+and finally:
+```shell
+ ros2 launch my_robot_bringup my_robot_gazebo.launch.xml 
+```
+in a separate terminal:
+
+```shell
+ros2 run robot_controller go_with_arm
+```
+
+![Image](https://github.com/user-attachments/assets/e2378e6b-73fe-4871-864f-b0aeccee0c73)
+
+and the result 
+
+</div>
+ <div style="text-align:center;">
+    <img src="image/result.png" alt="23" width="800">
+</div>
+
+
+and collection images is inside to the florder `data` the file `image_data_arm2`
+
