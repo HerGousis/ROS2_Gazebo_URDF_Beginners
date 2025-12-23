@@ -18,7 +18,7 @@ class Arm6DOFController(Node):
 
         tk.Label(
             self.root,
-            text="Έλεγχος αρθρώσεων (yaw₁, pitch₁, pitch₂, yaw₂, pitch₃, roll₁)"
+            text=" (yaw₁, pitch₁, pitch₂, yaw₂, pitch₃, roll₁)"
         ).pack(pady=5)
 
         # Sliders
@@ -77,14 +77,14 @@ class Arm6DOFController(Node):
         traj.header = Header()
         traj.header.frame_id = 'base_footprint'
 
-        # ✅ Ακριβώς τα joints που υπάρχουν στο URDF
+       
         traj.joint_names = [
-            'arm_base_2_joint',         # Yaw₁
-            'arm_base_forearm_joint',   # Pitch₁ (ώμος)
-            'forearm_hand_joint',       # Pitch₂ (αγκώνας)
-            'hand_2_joint',             # Yaw₂ (καρπός)
-            'base_camera_joint',        # Pitch₃ (κάμερα)
-            'hand_3_joint'              # Roll₁ (νέα άρθρωση γύρω από X)
+            'arm_base_2_joint',         
+            'arm_base_forearm_joint',   
+            'forearm_hand_joint',      
+            'hand_2_joint',            
+            'base_camera_joint',        
+            'hand_3_joint'              
         ]
 
         point = JointTrajectoryPoint()

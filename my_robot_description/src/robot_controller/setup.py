@@ -30,7 +30,8 @@ setup(
             "ransac=robot_controller.ransac:main",
             "go_dokari=robot_controller.go_dokari:main",
             "go_with_arm=robot_controller.go_with_arm:main",
-            "position_detect=robot_controller.position_detect:main"
+            "position_detect=robot_controller.position_detect:main",
+            "olo_mazi=robot_controller.olo_mazi:main"
             
         ],
     },

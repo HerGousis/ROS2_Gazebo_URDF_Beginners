@@ -20,12 +20,10 @@ class PositionPublisher(Node):
 
         self.publisher = self.create_publisher(PoseArray, 'robots_positions', 10)
         
-        # Τρέχουμε τον έλεγχο συχνά (π.χ. 10Hz = 0.1s), αλλά αποθηκεύουμε ΜΟΝΟ αν κουνηθεί
+        
         self.timer = self.create_timer(0.1, self.check_and_publish)
 
-        # ---------------------------------------------------------
-        # ΡΥΘΜΙΣΕΙΣ PATH, JSON ΚΑΙ FRAMES
-        # ---------------------------------------------------------
+        
         self.save_directory = "/home/hercules/data/" 
         self.filename = "ugv_path_data.json"
         self.full_file_path = os.path.join(self.save_directory, self.filename)
@@ -33,12 +31,12 @@ class PositionPublisher(Node):
         self.target_frame_base = "base_footprint"  
         self.target_frame_2nd  = "camera_link_optical" 
         
-        # ΝΕΟ: Όριο κίνησης (σε μέτρα). Αν κουνηθεί λιγότερο από 1cm, το αγνοούμε.
+        
         self.movement_threshold = 0.01 
 
-        # Μεταβλητές για να θυμόμαστε την ΤΕΛΕΥΤΑΙΑ ΚΑΤΑΓΕΓΡΑΜΜΕΝΗ θέση
-        self.last_recorded_base = None # (x, y, z)
-        self.last_recorded_sec  = None # (x, y, z)
+        
+        self.last_recorded_base = None 
+        self.last_recorded_sec  = None 
 
         if not os.path.exists(self.save_directory):
             os.makedirs(self.save_directory, exist_ok=True)
@@ -48,7 +46,7 @@ class PositionPublisher(Node):
 
         self.path_history = []  
         
-        # Ιστορικό για Plots
+        
         self.base_x, self.base_y = [], []
         self.sec_x, self.sec_y, self.sec_z = [], [], []
         self.sec_dx, self.sec_dy, self.sec_dz = [], [], []
@@ -57,9 +55,7 @@ class PositionPublisher(Node):
 
         self.get_logger().info(f"Tracking Changes (> {self.movement_threshold}m): {self.target_frame_base} & {self.target_frame_2nd}")
 
-        # ---------------------------------------------------------
-        # Matplotlib Setup
-        # ---------------------------------------------------------
+        # ------------------------------------------------------
         plt.ion()
         self.fig = plt.figure(figsize=(12, 6))
         
@@ -94,7 +90,7 @@ class PositionPublisher(Node):
         return dir_x, dir_y, dir_z
 
     def calculate_distance(self, pos1, pos2):
-        """Υπολογίζει την ευκλείδεια απόσταση μεταξύ δύο σημείων (x,y,z)"""
+        
         return math.sqrt((pos1[0]-pos2[0])**2 + (pos1[1]-pos2[1])**2 + (pos1[2]-pos2[2])**2)
 
     def check_and_publish(self):
@@ -118,31 +114,31 @@ class PositionPublisher(Node):
             except TransformException:
                 pass
 
-            # --- ΛΟΓΙΚΗ ΕΛΕΓΧΟΥ ΚΙΝΗΣΗΣ ---
+            
             should_record = False
 
-            # Αν είναι η πρώτη φορά που τρέχει, καταγράφουμε σίγουρα
+            
             if self.last_recorded_base is None:
                 should_record = True
             else:
-                # Υπολογισμός απόστασης από την τελευταία ΚΑΤΑΓΕΓΡΑΜΜΕΝΗ θέση
+                
                 dist_base = self.calculate_distance(current_base_pos, self.last_recorded_base)
                 
                 dist_sec = 0.0
                 if has_sec and self.last_recorded_sec:
                     dist_sec = self.calculate_distance(current_sec_pos, self.last_recorded_sec)
 
-                # Αν κουνήθηκε η βάση OR το χέρι/κάμερα περισσότερο από το όριο
+                
                 if dist_base > self.movement_threshold or dist_sec > self.movement_threshold:
                     should_record = True
 
             if should_record:
-                # Ενημερώνουμε τις "τελευταίες" θέσεις
+                
                 self.last_recorded_base = current_base_pos
                 if has_sec:
                     self.last_recorded_sec = current_sec_pos
 
-                # Publish Topic (για debugging/visualization στο rviz)
+                
                 pose_array = PoseArray()
                 pose_array.header.stamp = self.get_clock().now().to_msg()
                 pose_array.header.frame_id = 'world'
@@ -153,7 +149,7 @@ class PositionPublisher(Node):
 
                 self.get_logger().info(f"Moved! Base: ({bx:.2f}, {by:.2f}) | 2nd: ({current_sec_pos[0]:.2f}...)")
 
-                # Update Lists
+                
                 self.base_x.append(bx)
                 self.base_y.append(by)
                 
@@ -165,12 +161,12 @@ class PositionPublisher(Node):
                     self.sec_dy.append(dy)
                     self.sec_dz.append(dz)
 
-                # Update Plots & Save JSON
+                
                 self.update_plots(bx, by, has_sec)
                 self.save_to_json(bx, by, bz, current_sec_pos[0], current_sec_pos[1], current_sec_pos[2])
 
         except TransformException as e:
-            # self.get_logger().warn(f"TF Error: {str(e)}")
+            
             pass
 
     def save_to_json(self, bx, by, bz, sx, sy, sz):
@@ -210,7 +206,7 @@ class PositionPublisher(Node):
                 length=0.2, normalize=True, color='blue', linewidth=1, arrow_length_ratio=0.3
             )
 
-            # Dynamic Scaling
+            
             min_x, max_x = min(self.sec_x), max(self.sec_x)
             min_y, max_y = min(self.sec_y), max(self.sec_y)
             min_z, max_z = min(self.sec_z), max(self.sec_z)

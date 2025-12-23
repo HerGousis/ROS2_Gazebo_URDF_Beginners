@@ -1,6 +1,6 @@
 import rclpy
 from rclpy.node import Node
-from geometry_msgs.msg import Twist  # Μήνυμα για κίνηση ρομπότ
+from geometry_msgs.msg import Twist  
 
 class RobotController(Node):
     def __init__(self):
@@ -10,8 +10,8 @@ class RobotController(Node):
 
     def move_robot(self):
         msg = Twist()
-        msg.linear.x = 0.5  # Κίνηση μπροστά
-        msg.angular.z = 0.0  # Χωρίς στροφή
+        msg.linear.x = 0.5  
+        msg.angular.z = 0.0  
         self.publisher_.publish(msg)
         self.get_logger().info('Moving forward!')
 

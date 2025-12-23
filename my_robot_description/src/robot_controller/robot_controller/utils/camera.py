@@ -9,7 +9,7 @@ import time
 
 class Camera:
     def __init__(self, node):
-        self.node = node  # ROS2 node για logging
+        self.node = node  
         self.bridge = CvBridge()
         self.image_folder_path = "/home/hercules/data/image_data/"
 

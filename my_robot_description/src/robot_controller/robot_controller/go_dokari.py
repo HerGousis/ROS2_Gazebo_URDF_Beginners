@@ -14,18 +14,18 @@ class SLAMIntegration(Node):
     def __init__(self):
         super().__init__('slam_integration')
 
-        # Συνδρομή στα δεδομένα του LIDAR
+        
         self.lidar_subscriber = self.create_subscription(
             LaserScan,
             '/gazebo_ros_ray_sensor/out',
             self.lidar_callback,
             10)
 
-        # Δημοσίευση των δεδομένων στο /scan (π.χ. δεύτερο topic)
+        
         self.scan_publisher = self.create_publisher(LaserScan, '/gazebo_ros_ray_sensor2/out', 10)
 
     def lidar_callback(self, msg):
-        # Αναμετάδοση των δεδομένων LIDAR (προαιρετικά, μπορεί να αφαιρεθεί κι αυτό)
+        
         self.scan_publisher.publish(msg)
 
 
@@ -33,19 +33,19 @@ class ObstacleAvoidance(Node):
     def __init__(self):
         super().__init__('robot_controller')
 
-        # ----------- Ρύθμιση φακέλου εικόνων -----------
+        
         self.image_folder_path = '/home/hercules/data/image_data/'
         os.makedirs(self.image_folder_path, exist_ok=True)
         self.delete_old_images()
 
-        # ----------- Συνδρομή στο LIDAR -----------
+        
         self.laser_subscriber = self.create_subscription(
             LaserScan,
             '/gazebo_ros_ray_sensor/out',
             self.lidar_callback,
             10)
 
-        # ----------- Συνδρομές στις κάμερες -----------
+        
         self.bridge = CvBridge()
         camera_topics = [
             ('/camera_sensor/image_raw', 'image1'),
@@ -61,15 +61,14 @@ class ObstacleAvoidance(Node):
             for topic, prefix in camera_topics
         ]
 
-        # ----------- Δημοσίευση εντολών κίνησης -----------
+        
         self.cmd_publisher = self.create_publisher(Twist, '/cmd_vel', 10)
         self.safe_distance = 1.6
 
-        # ----------- Timers για λήψη εικόνων -----------
+        
         self.camera_timer = self.create_timer(100.0, self.capture_image)
 
     # ==============================================================
-    #               Υποστηρικτικές Συναρτήσεις
     # ==============================================================
 
     def delete_old_images(self):

@@ -42,9 +42,9 @@
             <ray>
              <scan>
               <horizontal>
-                <samples>10</samples>                 <!-- 10 ακτίνες -->
+                <samples>10</samples>                 
           <resolution>1</resolution>
-          <min_angle>-0.0436332</min_angle>     <!-- -2.5° σε rad -->
+          <min_angle>-0.0436332</min_angle>    
           <max_angle>0.0436332</max_angle> 
 
 

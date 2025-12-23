@@ -6,7 +6,7 @@ from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
-    # Xacro αρχείο του UGV
+    
     ugv_xacro_file = PathJoinSubstitution([
         FindPackageShare("my_robot_description"),
         "urdf",
@@ -17,7 +17,7 @@ def generate_launch_description():
     robot_description = {"robot_description": robot_description_content}
 
     return LaunchDescription([
-        # TF: world -> odom_ugv
+        
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
@@ -26,7 +26,7 @@ def generate_launch_description():
             output="screen"
         ),
 
-        # TF: odom_ugv -> base_footprint1 (UGV)
+        
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
@@ -35,7 +35,7 @@ def generate_launch_description():
             output="screen"
         ),
 
-        # UGV Robot State Publisher
+        
         Node(
             package="robot_state_publisher",
             executable="robot_state_publisher",

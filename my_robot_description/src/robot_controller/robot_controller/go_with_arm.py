@@ -14,24 +14,24 @@ from cv_bridge import CvBridge
 import cv2
 import time
 from datetime import datetime
-import shutil # ΝΕΟ: Για πιο δυναμική διαγραφή
+import shutil 
 
 class CameraCaptureNode(Node):
     def __init__(self):
         super().__init__('camera_capture_node')
 
-        # --- ΡΥΘΜΙΣΕΙΣ PATHS ---
+        
         self.data_dir = '/home/hercules/data/'
         self.image_folder = os.path.join(self.data_dir, 'image_data') 
         self.json_file = os.path.join(self.data_dir, 'lidar_log.json') 
 
-        # Δημιουργία φακέλων
+        
         try:
             os.makedirs(self.image_folder, exist_ok=True)
         except PermissionError:
-            self.get_logger().error(f"❌ DEN EXW DIKAIOMA EGGRAFIS STO {self.data_dir}. Kane chown h trexe me sudo.")
+            self.get_logger().error(f"")
 
-        # --- ΚΑΘΑΡΙΣΜΟΣ & ΑΡΧΙΚΟΠΟΙΗΣΗ ---
+        
         self.init_json_file()
 
         self.bridge = CvBridge()
@@ -39,17 +39,17 @@ class CameraCaptureNode(Node):
         self.latest_lidar_avg = 0.0
         self.json_data_list = [] 
 
-        # Subscribers
+        
         self.create_subscription(Image, '/camera_sensor/image_raw', self.camera_callback, 10)
         self.create_subscription(LaserScan, '/gazebo_ros_ray_sensor3/out', self.lidar_callback, 10)
 
-        # Timer
+        
         self.create_timer(0.5, self.capture_photo_and_log)
-        self.get_logger().info("📸 CameraCaptureNode started.")
+        self.get_logger().info("CameraCaptureNode started.")
 
     def init_json_file(self):
-        """Καθαρίζει τα παλιά και φτιάχνει ένα άδειο JSON αρχείο"""
-        # Καθαρισμός εικόνων
+        
+        
         if os.path.exists(self.image_folder):
             for f in os.listdir(self.image_folder):
                 if f.endswith((".jpg", ".png")):
@@ -58,20 +58,20 @@ class CameraCaptureNode(Node):
                     except Exception as e:
                         self.get_logger().warn(f"Cannot delete image: {e}")
 
-        # Διαγραφή παλιού JSON αν υπάρχει
+        
         if os.path.exists(self.json_file):
             try:
                 os.remove(self.json_file)
             except OSError as e:
-                self.get_logger().error(f"⚠️ Failed to delete old JSON (Permission Error?): {e}")
+                self.get_logger().error(f"Failed to delete old JSON (Permission Error?): {e}")
 
-        # Δημιουργία ΚΕΝΟΥ αρχείου JSON τώρα, για να δούμε αν γράφεται
+        
         try:
             with open(self.json_file, 'w') as f:
-                json.dump([], f) # Γράφουμε μια άδεια λίστα
-            self.get_logger().info(f"✅ JSON file initialized successfully at: {self.json_file}")
+                json.dump([], f) 
+            self.get_logger().info(f" JSON file initialized successfully at: {self.json_file}")
         except Exception as e:
-            self.get_logger().fatal(f"🔥 CRITICAL: CANNOT CREATE JSON FILE! Error: {e}")
+            self.get_logger().fatal(f" CRITICAL: CANNOT CREATE JSON FILE! Error: {e}")
 
     def camera_callback(self, msg):
         try:
@@ -88,22 +88,19 @@ class CameraCaptureNode(Node):
 
     def capture_photo_and_log(self):
         if self.last_image is None:
-            # Αν θες να μην γεμίζει logs η κονσόλα, σχολίασε την από κάτω γραμμή
-            # self.get_logger().warn("Waiting for image...")
+            
             return
         
         timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S_%f")[:-3]
         img_filename = f"img_{timestamp_str}.jpg"
         
-        # --- 1. ΑΠΟΘΗΚΕΥΣΗ ΕΙΚΟΝΑΣ ---
+        
         try:
             full_img_path = os.path.join(self.image_folder, img_filename)
             cv2.imwrite(full_img_path, self.last_image)
         except Exception as e:
-            self.get_logger().error(f"❌ Image Save Failed: {e}")
-            return # Αν αποτύχει η εικόνα, σταματάμε
-
-        # --- 2. ΕΓΓΡΑΦΗ JSON ---
+            self.get_logger().error(f" Image Save Failed: {e}")
+            return 
         try:
             entry = {
                 "timestamp": timestamp_str,
@@ -116,15 +113,14 @@ class CameraCaptureNode(Node):
             with open(self.json_file, 'w') as f:
                 json.dump(self.json_data_list, f, indent=4)
             
-            self.get_logger().info(f"💾 OK: {img_filename} | JSON Updated")
+            self.get_logger().info(f"OK: {img_filename} | JSON Updated")
 
         except Exception as e:
-            # ΑΥΤΟ ΤΟ ΜΗΝΥΜΑ ΘΑ ΜΑΣ ΠΕΙ ΓΙΑΤΙ ΔΕΝ ΦΤΙΑΧΝΕΤΑΙ ΤΟ JSON
-            self.get_logger().error(f"🔥 JSON WRITE FAILED: {e}")
+            
+            self.get_logger().error(f"JSON WRITE FAILED: {e}")
 
 # ==============================================================
-# === Κόμβος: Smart Arm Follower (Απαράλλαχτος) ================
-# ==============================================================
+
 class SmartArmFollower(Node):
     def __init__(self):
         super().__init__('smart_arm_follower')
@@ -137,11 +133,11 @@ class SmartArmFollower(Node):
         self.arm_pub = self.create_publisher(JointTrajectory, '/set_joint_trajectory', 10)
         self.positions = self.load_positions(self.arm_config_path)
         self.create_timer(2.0, self.control_cycle)
-        self.get_logger().info("✅ SmartArmFollower started.")
+        self.get_logger().info("SmartArmFollower started.")
 
     def load_positions(self, path):
         if not os.path.exists(path):
-            self.get_logger().error(f"❌ YAML file not found: {path}")
+            self.get_logger().error(f" YAML file not found: {path}")
             return []
         with open(path, 'r') as f:
             data = yaml.safe_load(f)

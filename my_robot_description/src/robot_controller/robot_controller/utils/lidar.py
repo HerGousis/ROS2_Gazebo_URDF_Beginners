@@ -6,10 +6,10 @@ import os
 
 class Lidar:
     def __init__(self, node):
-        self.node = node  # Παίρνει το Node από έξω
-        self.safe_distance = 2.0  # Απόσταση ασφαλείας
+        self.node = node  
+        self.safe_distance = 2.0  
 
-        # Δημιουργία publisher για εντολές κίνησης
+        
         self.cmd_publisher = self.node.create_publisher(Twist, '/cmd_vel', 10)
 
         self.laser_file_path = '/home/hercules/data/laser_data/laser_data1.txt'
@@ -47,7 +47,7 @@ class Lidar:
             self.laser_file.close()
     
     def record_laser_data(self):
-        # Λήψη των τρεχόντων δεδομένων LIDAR κάθε 10 δευτερόλεπτα
+        
         laser_data = "Recorded laser data at timestamp\n"
         self.laser_file.write(laser_data)
         self.node.get_logger().info("Laser data recorded.")
